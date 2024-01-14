@@ -14,6 +14,7 @@ for i in range(1, num):
     else:
         print(str(i))
 """
+"""
 class node:
     def __init__(self, value = None, next = None):
         self.value = value
@@ -88,9 +89,42 @@ answer = addnode.search(9)
 addnode.printit()
 print(answer)
 
+"""
+class node:
+    def __init__(self, value = None, next = None, pre = None):
+        self.value = value
+        self.next = None
+        self.pre = None
+class linkedlist:
+    def __init__(self, head = None):
+        self.head = None
+
+    def addend(self, data):
+        newnode = node(data)
+        if self.head == None:
+            last = newnode
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = newnode
+        newnode.pre = last
+
+    def printout(self):
+        last = self.head
+        while last:
+            last = last.next
+        while last:
+            print(last.value)
+            last = last.pre
 
 
-
+add = linkedlist()
+add.addend(2)
+add.addend(3)
+add.addend(4)
+add.addend(5)
+add.printout()
 
 
 
