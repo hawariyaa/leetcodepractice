@@ -102,29 +102,87 @@ class linkedlist:
     def addend(self, data):
         newnode = node(data)
         if self.head == None:
-            last = newnode
+            self.head = newnode
             return
         last = self.head
         while last.next:
             last = last.next
         last.next = newnode
         newnode.pre = last
-
+    def addbig(self, data):
+        newnode = node(data)
+        if self.head == None:
+            self.head = newnode
+            return
+        last = self.head
+        newnode.next = self.head
+        self.head = newnode
+        last.pre = newnode
+    def addmid(self, data, place):
+        newnode = node(data)
+        last = self.head
+        firstt = self.head
+        num = 2
+        while place > num:
+            last = last.next
+            num += 1
+        num = 2
+        while place >= num:
+            firstt = firstt.next
+            num += 1
+        newnode.next = last.next
+        last.next = newnode
+        newnode.pre = last
+        firstt.pre = newnode
     def printout(self):
         last = self.head
         while last:
+            print(last.value)
+            last = last.next
+    def printrev(self):
+        last = self.head
+        while last.next:
             last = last.next
         while last:
             print(last.value)
             last = last.pre
-
+    def deletenode(self, place):
+        last = self.head
+        first = self.head
+        middle = self.head
+        num = 1
+        if place == 1:
+            self.head = last.next
+            last.next = None
+            self.head.pre = None
+            return
+        while num != place:
+            middle = middle.next
+            num += 1
+        num = 1
+        while num != place - 1:
+            last = last.next
+            num += 1
+        if middle.next == None:
+            middle.pre = None
+            last.next = None
+            return
+        num = 1
+        while num != place + 1:
+            first = first.next
+            num += 1
+        last.next = first
+        first.pre = last
 
 add = linkedlist()
 add.addend(2)
 add.addend(3)
 add.addend(4)
 add.addend(5)
-add.printout()
+add.addbig(1)
+add.addmid(7, 4)
+add.deletenode(6)
+add.printrev()
 
 
 
